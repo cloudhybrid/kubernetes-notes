@@ -527,7 +527,7 @@ kubectl describe namespace priyadku
 kubectl delete namespace priyadku
    
 Use the same namespace in pod
-===============================
+=============================
 
 apiVersion: extensions/v1beta1
 kind: Deployment
