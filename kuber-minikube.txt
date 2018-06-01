@@ -495,6 +495,61 @@ kubectl get nodes
 
 kubectl describe node nodename
 
+Namespaces
+===========
+
+Devide a single physical cluster into multiple virtual cluster.
+Each namespace corresponds to one virtual cluster and it help intercommunication of pods.
+
+Three name spaces are there predefined.
+
+a. default : if nothing is defined : This is a default namespace for objects bed no other namespace is explicitly specified by the administrator or the user.
+b. kube-system : 
+c. kube-public : This is a deliberately be accessible and automatically readable namespace on users even those who are not authenticated can make use of resources which are in the public namespace. This is mostly used for usage for sources that need to be made available to all the cluster name spaces into one of these.
+
+
+Objects only need to have unique names within a namespace.
+You can reuse object names across names spaces in future versions of communities.
+The idea is that objects in the same namespace will all have the same access control policies by default.
+
+Create a namespace:
+==================
+
+apiVersion: v1
+kind: Namespce
+metadata
+   name: priyadku
+   
+kubectl create –f priyadku.yml 
+kubectl get namespace 
+kubectl get namespace priyadku 
+kubectl describe namespace priyadku
+kubectl delete namespace priyadku
+   
+Use the same namespace in pod
+===============================
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+ metadata:
+  name: nodejsapp.example.com
+  namespace: priyadku
+ spec:
+  replicas: 3
+  selector:
+    app: helloworld
+template:
+ metadata:
+   labels:
+    app: helloworld
+ spec
+  containers:
+  - name: nodejsapp
+    image: priyadku/nodejsapp
+    ports:
+    - name: nodejs-port
+      containerPort: 3000
+
 
 VOlumes:
 ========
@@ -534,6 +589,8 @@ kubectl describe pod <abovepod>
 -f wordpress-web.yml
 
 -f wordpress-web-service.yml
+
+
 
 
 
